@@ -12,15 +12,17 @@
     <div class="todoWrapper">
         <form action="/" method="post">
             <div class="toDoInput">
-                <input type="text" name="todo" value="">
-                <input type="submit" value="Add ToDo">
+                <input type="text" name="todo" class="addInput" value="" placeholder="Add a ToDo">
+                <input type="submit" value="Add It" class="sbmtbtn">
             </div>
         </form>
         <div class="needToBeDone">
+            {{#todo}}
+              <p class="needToDo">{{todo}}</p>
+            {{/todo}}
         </div>
         <div class="finished">
         </div>
-
 </body>
 
 </html>
