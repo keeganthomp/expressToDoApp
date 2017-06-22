@@ -18,10 +18,15 @@ app.get("/", function(req, res) {
   res.render("index");
 });
 var toDoArray = [];
+var tempArray = [];
+var doneArray = [];
 app.post("/", function(req, res) {
   var todo = req.body;
-  toDoArray.push(todo);
-  res.render("index", { todo: toDoArray });
+  if (todo.todo != "") {
+    toDoArray.push(todo);
+    res.render("index", { todo: toDoArray });
+    console.log("toDoArray", toDoArray);
+  }
   // console.log(todo);
 });
 

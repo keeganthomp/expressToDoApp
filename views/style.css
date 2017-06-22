@@ -1,19 +1,32 @@
 .todoWrapper {
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .needToBeDone {
+    width: 500px;
     text-align: center;
-    margin: 0;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
 }
 
 .needToDo {
     border: 1px solid black;
 }
+
+.toDoInput {
+    /*width: 40%;*/
+}
+
+form {
+    width: 500px;
+    margin: 0 auto;
+}
+
 
 .addInput {
     height: 2rem;
@@ -43,4 +56,20 @@
 
 .addInput::-webkit-input-placeholder {
     text-align: center;
+}
+
+.fadeOut {
+  opacity: 0;
+  animation: fadeOut .5s ease-in 1 forwards;
+}
+
+.finished {
+    text-align: center;
+    position: fixed;
+    top: 23rem;
+    left: 26rem;
+}
+
+.completed {
+    text-decoration: line-through;
 }
