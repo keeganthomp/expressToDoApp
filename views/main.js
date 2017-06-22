@@ -19,5 +19,5 @@ function addToFinishedDiv(el) {
 
 function removeToDo (el) {
     el.classList.add("fadeOut");
-    setTimeout(function(){el.remove()}, 1000);
+    el.remove();
 }
