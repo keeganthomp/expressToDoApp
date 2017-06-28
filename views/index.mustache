@@ -22,9 +22,13 @@
             {{/todo}}
         </div>
         <div class="finished">
-            <h3>Finished ToDo's</h3>   
+            <h3>Finished ToDo's</h3>         
+        {{#doneArray}}
+            <p class="completed">{{completed}}</p>
+        {{/doneArray}}  
         </div>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="main.js"></script>
 </body>
 

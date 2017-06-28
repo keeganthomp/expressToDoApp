@@ -2,22 +2,18 @@
   var todos = document.querySelectorAll(".needToDo");
   for (let i = 0; i < todos.length; i++) {
     todos[i].addEventListener("click", function() {
-        removeToDo(todos[i]);
-      addToFinishedDiv(todos[i]);
+      var clickedTodo = this.innerHTML;
+      axios
+        .post("/complete", {
+          completed: clickedTodo
+        })
+        .then(function(response) {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     });
   }
 })();
-
-function addToFinishedDiv(el) {
-  var finished = document.querySelector(".finished");
-  var p = document.createElement("p");
-  p.innerHTML = el.innerHTML;
-  p.classList.add("completed");
-  finished.appendChild(p);
-}
-
-
-function removeToDo (el) {
-    el.classList.add("fadeOut");
-    el.remove();
-}
