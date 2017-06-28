@@ -23,7 +23,7 @@ app.get("/", function(req, res) {
   models.todos
     .findAll()
     .then(function(todoList) {
-      res.render("index", { todo: todoList });
+      res.render("index", { todo: todoList, doneArray: doneArray });
       // console.log("todoList:", todoList);
     })
     .catch(function(err) {
@@ -33,22 +33,25 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
   var myToDo = req.body.todo;
-  console.log("req body:", req.body);
-  console.log("myToDo:", myToDo);
   toDoArray.push(myToDo);
   var newTodo = models.todos.build({ title: myToDo });
   newTodo.save().then(function(saved) {
     res.redirect("/");
-
   });
 });
 
 app.post("/complete", function(req, res) {
   var clickedTodo = req.body.completed;
-  doneArray.push(clickedTodo);
+  models.todos
+    .destroy({ where: { title: clickedTodo } })
+    .then(function() {
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
   var index = toDoArray.indexOf(clickedTodo);
   toDoArray.splice(index, 1);
-  res.redirect("/");
 });
 
 app.listen(port, function(req, res) {
