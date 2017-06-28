@@ -14,16 +14,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
+app.use("/", express.static("./views"));
+
 var toDoArray = [];
 var doneArray = [];
-
-app.use("/", express.static("./views"));
 
 app.get("/", function(req, res) {
   models.todos
     .findAll()
     .then(function(todoList) {
-      res.render("index", { todo: todoList, doneArray: doneArray });
+      res.render("index", { todo: todoList });
       // console.log("todoList:", todoList);
     })
     .catch(function(err) {
@@ -42,6 +42,10 @@ app.post("/", function(req, res) {
 
 app.post("/complete", function(req, res) {
   var clickedTodo = req.body.completed;
+  var newCompletedTask = models.completed.build({ title: clickedTodo });
+  newCompletedTask.save().then(function(saved) {
+    res.redirect("/");
+  });
   models.todos
     .destroy({ where: { title: clickedTodo } })
     .then(function() {
@@ -50,6 +54,7 @@ app.post("/complete", function(req, res) {
     .catch(function(err) {
       res.status(500).send(err);
     });
+
   var index = toDoArray.indexOf(clickedTodo);
   toDoArray.splice(index, 1);
 });

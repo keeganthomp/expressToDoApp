@@ -18,18 +18,19 @@
         </form>
         <div class="needToBeDone">
             {{#todo}}
-              <p id="{{id}}" class="needToDo">{{title}}</p>
+            <p id="{{id}}" class="needToDo">{{title}}</p>
             {{/todo}}
         </div>
         <div class="finished">
-            <h3>Finished ToDo's</h3>         
-        {{#doneArray}}
+            <h3>Finished ToDo's</h3>
+            {{#doneArray}}
             <p class="completed">{{completed}}</p>
-        {{/doneArray}}  
+            {{/doneArray}}
         </div>
+    </div>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

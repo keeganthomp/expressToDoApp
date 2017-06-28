@@ -8,6 +8,8 @@
 
 .needToBeDone {
   width: 500px;
+  height: 400px;
+  overflow: scroll;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -50,13 +52,13 @@ form {
   width: 100%;
   margin-top: 2%;
   background: none;
-  border: 1px solid black;
-  color: black;
+  border: 1px solid green;
+  color: green;
   transition: color .5s;
 }
 
 .sbmtbtn:hover {
-  background: black;
+  background: green;
   color: white;
   transition: all .5s;
 }
@@ -71,11 +73,9 @@ form {
 }
 
 .finished {
+  margin: 0 auto;
   text-align: center;
   width: 500px;
-  position: fixed;
-  top: 23rem;
-  left: 30rem;
 }
 
 .completed {
