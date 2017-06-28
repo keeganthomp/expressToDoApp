@@ -19,17 +19,21 @@ app.use("/", express.static("./views"));
 var toDoArray = [];
 var doneArray = [];
 
+
+
 app.get("/", function(req, res) {
   models.todos
     .findAll()
     .then(function(todoList) {
-      res.render("index", { todo: todoList });
+      res.render("index", { todo: todoList});
       // console.log("todoList:", todoList);
     })
     .catch(function(err) {
       res.status(500).send(err);
     });
 });
+
+
 
 app.post("/", function(req, res) {
   var myToDo = req.body.todo;
@@ -40,10 +44,12 @@ app.post("/", function(req, res) {
   });
 });
 
+
+
 app.post("/complete", function(req, res) {
   var clickedTodo = req.body.completed;
   var newCompletedTask = models.completed.build({ title: clickedTodo });
-  newCompletedTask.save().then(function(saved) {
+  newCompletedTask.save().then(function(completed) {
     res.redirect("/");
   });
   models.todos
@@ -54,10 +60,11 @@ app.post("/complete", function(req, res) {
     .catch(function(err) {
       res.status(500).send(err);
     });
-
   var index = toDoArray.indexOf(clickedTodo);
   toDoArray.splice(index, 1);
 });
+
+
 
 app.listen(port, function(req, res) {
   console.log("You are up and runnning on", port);
