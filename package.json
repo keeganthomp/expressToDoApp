@@ -18,6 +18,8 @@
   "homepage": "https://github.com/keeganthomp/expressToDoApp#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "mustache-express": "^1.2.4"
+    "mustache-express": "^1.2.4",
+    "pg": "^6.4.0",
+    "sequelize": "^4.2.0"
   }
 }

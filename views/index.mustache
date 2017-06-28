@@ -10,7 +10,7 @@
 
 <body>
     <div class="todoWrapper">
-        <form action="/" method="post">
+        <form action="/" method="POST">
             <div class="toDoInput">
                 <input type="text" name="todo" class="addInput" value="" placeholder="Add a ToDo">
                 <input type="submit" value="Add It" class="sbmtbtn">
@@ -18,7 +18,7 @@
         </form>
         <div class="needToBeDone">
             {{#todo}}
-              <p class="needToDo">{{todo}}</p>
+              <p id="{{id}}" class="needToDo">{{title}}</p>
             {{/todo}}
         </div>
         <div class="finished">

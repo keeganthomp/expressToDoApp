@@ -3,6 +3,7 @@ const app = express();
 const mustacheExpress = require("mustache-express");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
+const models = require("./models");
 const port = 7500;
 
 app.engine("mustache", mustacheExpress());
@@ -14,26 +15,36 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
 var toDoArray = [];
-var tempArray = [];
 var doneArray = [];
 
 app.use("/", express.static("./views"));
 
 app.get("/", function(req, res) {
-  res.render("index", { todo: toDoArray, doneArray: doneArray });
+  models.todos
+    .findAll()
+    .then(function(todoList) {
+      res.render("index", { todo: todoList });
+      // console.log("todoList:", todoList);
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
 });
 
 app.post("/", function(req, res) {
-  var todo = req.body;
-  if (todo.todo != "") {
-    toDoArray.push(todo);
-  }
-  res.redirect("/");
-  // console.log(todo);
+  var myToDo = req.body.todo;
+  console.log("req body:", req.body);
+  console.log("myToDo:", myToDo);
+  toDoArray.push(myToDo);
+  var newTodo = models.todos.build({ title: myToDo });
+  newTodo.save().then(function(saved) {
+    res.redirect("/");
+
+  });
 });
 
 app.post("/complete", function(req, res) {
-  clickedTodo = req.body;
+  var clickedTodo = req.body.completed;
   doneArray.push(clickedTodo);
   var index = toDoArray.indexOf(clickedTodo);
   toDoArray.splice(index, 1);
