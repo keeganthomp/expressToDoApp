@@ -17,3 +17,23 @@
     });
   }
 })();
+
+(function lookForIncompleteTasks() {
+  var unDoneTodos = document.querySelectorAll(".completed");
+  for (let i = 0; i < unDoneTodos.length; i++) {
+    unDoneTodos[i].addEventListener("click", function() {
+      var clickedTodo = this.innerHTML;
+      axios
+        .post("/undone", {
+          completed: clickedTodo
+        })
+        .then(function(response) {
+          console.log(response);
+          window.location.reload();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    });
+  }
+})();

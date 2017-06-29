@@ -18,6 +18,7 @@ app.use("/", express.static("./views"));
 
 var toDoArray = [];
 var doneArray = [];
+var completed;
 
 
 
@@ -25,8 +26,7 @@ app.get("/", function(req, res) {
   models.todos
     .findAll()
     .then(function(todoList) {
-      res.render("index", { todo: todoList});
-      // console.log("todoList:", todoList);
+      res.render("index", { todo: todoList });
     })
     .catch(function(err) {
       res.status(500).send(err);
@@ -45,23 +45,29 @@ app.post("/", function(req, res) {
 });
 
 
-
 app.post("/complete", function(req, res) {
   var clickedTodo = req.body.completed;
-  var newCompletedTask = models.completed.build({ title: clickedTodo });
-  newCompletedTask.save().then(function(completed) {
-    res.redirect("/");
-  });
   models.todos
-    .destroy({ where: { title: clickedTodo } })
+    .update({description: true},{ where: { title: clickedTodo } })
     .then(function() {
       res.redirect("/");
     })
     .catch(function(err) {
       res.status(500).send(err);
     });
-  var index = toDoArray.indexOf(clickedTodo);
-  toDoArray.splice(index, 1);
+});
+
+
+app.post("/undone", function(req, res) {
+  var clickedTodo = req.body.completed;
+  models.todos
+    .update({description: null},{ where: { title: clickedTodo } })
+    .then(function() {
+      res.redirect("/");
+    })
+    .catch(function(err) {
+      res.status(500).send(err);
+    });
 });
 
 

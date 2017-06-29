@@ -85,4 +85,11 @@ form {
 
 .completed {
   text-decoration: line-through;
+  transition: all 1s;  
+}
+
+.completed:hover{
+  text-decoration: none;
+  border: 1px solid black;
+  cursor: pointer
 }

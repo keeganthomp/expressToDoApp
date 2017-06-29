@@ -2,7 +2,9 @@
 module.exports = function(sequelize, DataTypes) {
   var todos = sequelize.define('todos', {
     title: DataTypes.STRING,
-    description: DataTypes.STRING
+    description: {
+      type: DataTypes.STRING
+    }
   }, {
     classMethods: {
       associate: function(models) {
